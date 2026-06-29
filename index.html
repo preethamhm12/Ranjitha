@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Ranjita 🌸🌍❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{
+  height:100%;
+  font-family:'Inter',sans-serif;
+  background:linear-gradient(180deg,#ffd6e8,#ff9fcf,#ff78b6);
+  overflow:hidden;
+  color:#5a0033;
+}
+body{max-width:430px;margin:auto}
+
+/* FLOATING HEART BACKGROUND */
+.hearts-bg{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  overflow:hidden;
+  z-index:0;
+}
+.heart-float{
+  position:absolute;
+  bottom:-20px;
+  color:rgba(255,255,255,0.6);
+  font-size:12px;
+  animation:floatUp linear forwards;
+}
+@keyframes floatUp{
+  0%{transform:translateY(0) scale(0.6);opacity:0}
+  20%{opacity:0.8}
+  100%{transform:translateY(-110vh) scale(1.4);opacity:0}
+}
+
+/* screens */
+.screen{
+  position:absolute;
+  inset:0;
+  display:none;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+  gap:18px;
+  z-index:1;
+}
+.screen.active{display:flex}
+
+/* common */
+.title{
+  font-family:'Playfair Display',serif;
+  font-size:34px;
+  text-align:center;
+  color:#ff2f92;
+}
+.sub{
+  font-size:15px;
+  text-align:center;
+  opacity:.9;
+}
+.btn{
+  padding:14px 36px;
+  border:none;
+  border-radius:50px;
+  background:linear-gradient(135deg,#ff2f92,#ff7abf);
+  color:#fff;
+  font-size:16px;
+  box-shadow:0 12px 35px rgba(255,47,146,.6);
+}
+
+/* loader */
+.loader{
+  width:100%;
+  max-width:320px;
+  background:#fff;
+  border-radius:22px;
+  padding:22px;
+  box-shadow:0 25px 60px rgba(0,0,0,.25);
+}
+.load-num{
+  font-size:34px;
+  font-weight:600;
+  text-align:center;
+  color:#ff2f92;
+}
+.load-text{
+  font-size:13px;
+  text-align:center;
+  margin-top:6px;
+  opacity:.7;
+}
+.bar{
+  height:12px;
+  background:#f3c2d9;
+  border-radius:10px;
+  overflow:hidden;
+  margin-top:10px;
+}
+.fill{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,#ff2f92,#ff7abf);
+}
+.dark{
+  background:#2a0020;
+  color:#ffd6e8;
+}
+.dark .load-num{color:#ffd6e8}
+.dark .bar{background:#4a0035}
+
+/* heart */
+.heart{
+  width:85px;height:85px;
+  background:linear-gradient(135deg,#ff2f92,#ff9ad5);
+  transform:rotate(45deg);
+  position:relative;
+  animation:pulse 1.1s ease-in-out infinite;
+}
+.heart:before,.heart:after{
+  content:"";
+  position:absolute;
+  width:85px;height:85px;
+  background:inherit;
+  border-radius:50%;
+}
+.heart:before{left:-42px}
+.heart:after{top:-42px}
+@keyframes pulse{
+  0%{transform:rotate(45deg) scale(1)}
+  50%{transform:rotate(45deg) scale(1.15)}
+  100%{transform:rotate(45deg) scale(1)}
+}
+
+/* photos */
+.photo-area{
+  width:100%;
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:8px;
+}
+.photo-area.bottom{
+  grid-template-columns:1fr 1fr;
+}
+.photo{
+  position:relative;
+  aspect-ratio:3/4;
+  border-radius:14px;
+  overflow:hidden;
+  opacity:0;
+  transform:translateY(20px) scale(.95);
+  animation:photoIn 1s ease forwards;
+}
+.photo:nth-child(1){animation-delay:.2s}
+.photo:nth-child(2){animation-delay:.8s}
+.photo:nth-child(3){animation-delay:1.4s}
+.photo:nth-child(4){animation-delay:2.0s}
+.photo:nth-child(5){animation-delay:2.6s}
+@keyframes photoIn{to{opacity:1;transform:none}}
+.photo img{width:100%;height:100%;object-fit:cover}
+.caption{
+  position:absolute;
+  bottom:0;
+  width:100%;
+  padding:6px;
+  background:linear-gradient(to top,rgba(0,0,0,.6),transparent);
+  color:#fff;
+  font-size:12px;
+  text-align:center;
+}
+
+/* orbit message */
+.message-orbit{
+  position:relative;
+  width:260px;
+  height:260px;
+}
+.orbit-heart{
+  position:absolute;
+  top:50%;left:50%;
+  transform:translate(-50%,-50%) rotate(45deg);
+  width:70px;height:70px;
+  background:linear-gradient(135deg,#ff2f92,#ff9ad5);
+}
+.orbit-heart:before,.orbit-heart:after{
+  content:"";
+  position:absolute;
+  width:70px;height:70px;
+  background:inherit;
+  border-radius:50%;
+}
+.orbit-heart:before{left:-35px}
+.orbit-heart:after{top:-35px}
+.word{
+  position:absolute;
+  font-size:14px;
+  opacity:0;
+  animation:wordFade 2s ease forwards;
+}
+.word1{top:0;left:50%;transform:translateX(-50%);animation-delay:.5s}
+.word2{right:0;top:50%;transform:translateY(-50%);animation-delay:1.5s}
+.word3{bottom:0;left:50%;transform:translateX(-50%);animation-delay:2.5s}
+.word4{left:0;top:50%;transform:translateY(-50%);animation-delay:3.5s}
+@keyframes wordFade{to{opacity:1}}
+
+.final-card{
+  background:rgba(255,255,255,.9);
+  border-radius:22px;
+  padding:22px;
+  text-align:center;
+  box-shadow:0 25px 60px rgba(0,0,0,.25);
+}
+.signature{
+  font-family:'Playfair Display',serif;
+  font-size:20px;
+  margin-top:10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="hearts-bg"></div>
+
+<audio id="bgm" src="music.mp3" loop></audio>
+
+<!-- S1 -->
+<div class="screen active" id="s1">
+  <div class="heart"></div>
+  <div class="title">Enter My Heart ❤️</div>
+  <div class="sub">Some feelings need time…</div>
+  <button class="btn" id="enterBtn">Enter 💗</button>
+</div>
+
+<!-- S2 -->
+<div class="screen" id="s2">
+  <div class="loader" id="loaderBox">
+    <div class="load-num" id="loadNum">0%</div>
+    <div class="bar"><div class="fill" id="fill"></div></div>
+    <div class="load-text" id="loadText">Loading feelings…</div>
+  </div>
+</div>
+
+<!-- S3 -->
+<div class="screen" id="s3">
+  <div class="heart"></div>
+  <div class="title">Ranjita 🌸🌍❤️</div>
+  <div class="sub">Chosen quietly by my heart.</div>
+  <button class="btn" onclick="show(4)">Next →</button>
+</div>
+
+<!-- S4 -->
+<div class="screen" id="s4">
+  <div class="photo-area">
+    <div class="photo"><img src="1.jpg"><div class="caption">Grace ✨</div></div>
+    <div class="photo"><img src="2.jpg"><div class="caption">Peace 💗</div></div>
+    <div class="photo"><img src="3.jpg"><div class="caption">Elegance 🌷</div></div>
+  </div>
+  <div class="photo-area bottom">
+    <div class="photo"><img src="4.jpg"><div class="caption">Infinity ♾️</div></div>
+    <div class="photo"><img src="5.jpg"><div class="caption">Ranjita 🌸</div></div>
+  </div>
+  <button class="btn" onclick="show(5)">Next →</button>
+</div>
+
+<!-- S5 -->
+<div class="screen" id="s5">
+  <div class="message-orbit">
+    <div class="orbit-heart"></div>
+    <div class="word word1">Admiration</div>
+    <div class="word word2">Respect</div>
+    <div class="word word3">Care</div>
+    <div class="word word4">Silence</div>
+  </div>
+  <div class="final-card">
+    <div class="sub">
+      From deep inside my heart…<br><br>
+      Some feelings don’t rush.<br>
+      They stay gentle, quiet,<br>
+      and endlessly true.
+    </div>
+    <div class="signature">
+      Ranjita 🌸<br>
+      — Ranjita ❤️
+    </div>
+  </div>
+</div>
+
+<script>
+const heartsBg=document.querySelector(".hearts-bg");
+setInterval(()=>{
+  const h=document.createElement("div");
+  h.className="heart-float";
+  h.innerText="❤";
+  h.style.left=Math.random()*100+"vw";
+  h.style.animationDuration=(6+Math.random()*6)+"s";
+  h.style.fontSize=(8+Math.random()*12)+"px";
+  heartsBg.appendChild(h);
+  setTimeout(()=>h.remove(),12000);
+},500);
+
+const bgm=document.getElementById("bgm");
+const loadNum=document.getElementById("loadNum");
+const loadText=document.getElementById("loadText");
+const fill=document.getElementById("fill");
+const loaderBox=document.getElementById("loaderBox");
+
+let current=1;
+function show(n){
+  document.getElementById("s"+current).classList.remove("active");
+  current=n;
+  document.getElementById("s"+current).classList.add("active");
+}
+
+document.getElementById("enterBtn").onclick=()=>{
+  bgm.play();
+  show(2);
+
+  let v=0,phase=1;
+  const t=setInterval(()=>{
+    if(phase===1){v+=6;if(v>=80)phase=2}
+    else if(phase===2){v+=1;if(v>=90)phase=3}
+    else if(phase===3){v+=.5;if(v>=100){phase=4;loaderBox.classList.add("dark");v=100}}
+    else{
+      v+=40;
+      loadNum.innerText=v+"%";
+      loadText.innerText="Finalizing feelings…";
+      if(v>=1000){
+        clearInterval(t);
+        setTimeout(()=>show(3),1500);
+      }
+      return;
+    }
+    loadNum.innerText=Math.floor(v)+"%";
+    fill.style.width=Math.min(v,100)+"%";
+  },120);
+};
+</script>
+
+</body>
+</html>
